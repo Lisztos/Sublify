@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Build script for Subliminal Motivator macOS app
+# Build script for Sublify macOS app
 
-echo "🚀 Building Subliminal Motivator app..."
+echo "🚀 Building Sublify app..."
 
 # Check if Xcode is installed
 if ! command -v xcodebuild &> /dev/null; then
@@ -13,19 +13,19 @@ fi
 
 # Build the app
 echo "📦 Compiling Swift code..."
-xcodebuild -project SubliminalMotivator.xcodeproj -scheme SubliminalMotivator -configuration Release build
+xcodebuild -project Sublify.xcodeproj -scheme Sublify -configuration Release build
 
 if [ $? -eq 0 ]; then
     echo "✅ Build successful!"
     echo ""
     echo "📍 Your app is located at:"
-    echo "   build/Release/SubliminalMotivator.app"
+    echo "   build/Release/Sublify.app"
     echo ""
     echo "🎯 To run the app:"
-    echo "   open build/Release/SubliminalMotivator.app"
+    echo "   open build/Release/Sublify.app"
     echo ""
     echo "📋 To install to Applications folder:"
-    echo "   cp -R build/Release/SubliminalMotivator.app /Applications/"
+    echo "   cp -R build/Release/Sublify.app /Applications/"
 else
     echo "❌ Build failed. Please check the error messages above."
     exit 1

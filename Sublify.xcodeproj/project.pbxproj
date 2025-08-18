@@ -15,7 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A1234567890123456789012K /* SubliminalMotivator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SubliminalMotivator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1234567890123456789012K /* Sublify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sublify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1234567890123456789012B /* MotivatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivatorApp.swift; sourceTree = "<group>"; };
 		A1234567890123456789012D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A1234567890123456789012F /* MotivatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivatorManager.swift; sourceTree = "<group>"; };
@@ -35,7 +35,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A1234567890123456789012N /* SubliminalMotivator */ = {
+		A1234567890123456789012N /* Sublify */ = {
 			isa = PBXGroup;
 			children = (
 				A1234567890123456789012B /* MotivatorApp.swift */,
@@ -45,13 +45,13 @@
 				A1234567890123456789012J /* SettingsView.swift */,
 				A1234567890123456789012L /* Info.plist */,
 			);
-			path = SubliminalMotivator;
+			path = Sublify;
 			sourceTree = "<group>";
 		};
 		A1234567890123456789012O /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A1234567890123456789012K /* SubliminalMotivator.app */,
+				A1234567890123456789012K /* Sublify.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -59,7 +59,7 @@
 		A1234567890123456789012P = {
 			isa = PBXGroup;
 			children = (
-				A1234567890123456789012N /* SubliminalMotivator */,
+				A1234567890123456789012N /* Sublify */,
 				A1234567890123456789012O /* Products */,
 			);
 			sourceTree = "<group>";
@@ -67,9 +67,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A1234567890123456789012Q /* SubliminalMotivator */ = {
+		A1234567890123456789012Q /* Sublify */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A1234567890123456789012R /* Build configuration list for PBXNativeTarget "SubliminalMotivator" */;
+			buildConfigurationList = A1234567890123456789012R /* Build configuration list for PBXNativeTarget "Sublify" */;
 			buildPhases = (
 				A1234567890123456789012S /* Sources */,
 				A1234567890123456789012M /* Frameworks */,
@@ -79,9 +79,9 @@
 			);
 			dependencies = (
 			);
-			name = SubliminalMotivator;
-			productName = SubliminalMotivator;
-			productReference = A1234567890123456789012K /* SubliminalMotivator.app */;
+			name = Sublify;
+			productName = Sublify;
+			productReference = A1234567890123456789012K /* Sublify.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -99,7 +99,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A1234567890123456789012V /* Build configuration list for PBXProject "SubliminalMotivator" */;
+			buildConfigurationList = A1234567890123456789012V /* Build configuration list for PBXProject "Sublify" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -112,7 +112,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A1234567890123456789012Q /* SubliminalMotivator */,
+				A1234567890123456789012Q /* Sublify */,
 			);
 		};
 /* End PBXProject section */
@@ -275,13 +275,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Subliminal Motivator. All rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Sublify. All rights reserved.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.subliminal-motivator.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sublify.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -302,13 +302,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Subliminal Motivator. All rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Sublify. All rights reserved.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.subliminal-motivator.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sublify.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -318,7 +318,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A1234567890123456789012R /* Build configuration list for PBXNativeTarget "SubliminalMotivator" */ = {
+		A1234567890123456789012R /* Build configuration list for PBXNativeTarget "Sublify" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A1234567890123456789012Y /* Debug */,
@@ -327,7 +327,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A1234567890123456789012V /* Build configuration list for PBXProject "SubliminalMotivator" */ = {
+		A1234567890123456789012V /* Build configuration list for PBXProject "Sublify" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A1234567890123456789012W /* Debug */,

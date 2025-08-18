@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct SubliminalMotivatorApp: App {
+struct SublifyApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     var body: some Scene {

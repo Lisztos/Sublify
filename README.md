@@ -1,6 +1,6 @@
-# Subliminal Motivator - macOS Desktop Motivation App
+# Sublify - Subliminal Motivation for macOS
 
-A powerful macOS desktop application that displays personalized motivational messages or images using subliminal timing (125ms) or visible durations to influence your subconscious mind and boost productivity throughout the day.
+A sleek macOS desktop app that delivers personalized motivational messages using subliminal timing (125ms) or visible durations. Sublify makes subconscious motivation simple and effective for boosting your productivity throughout the day.
 
 ## Features
 
@@ -31,7 +31,7 @@ A powerful macOS desktop application that displays personalized motivational mes
 
 ### Getting Started
 
-1. **Open the App**: Launch Subliminal Motivator from your Applications folder
+1. **Open the App**: Launch Sublify from your Applications folder
 2. **Configure Settings**: Click "Settings" to customize your experience
 3. **Start Motivation**: Click "Start" to begin receiving motivational displays
 4. **Enjoy**: The app will work in the background, showing your content at the specified intervals
@@ -107,15 +107,15 @@ A powerful macOS desktop application that displays personalized motivational mes
 
 ### Build Steps
 
-1. Open `SubliminalMotivator.xcodeproj` in Xcode
+1. Open `Sublify.xcodeproj` in Xcode
 2. Select your development team in project settings
 3. Build and run (⌘+R)
 
 ### Project Structure
 
 ```md
-SubliminalMotivator/
-├── SubliminalMotivatorApp.swift # Main app entry point
+Sublify/
+├── SublifyApp.swift            # Main app entry point
 ├── ContentView.swift           # Main interface
 ├── SettingsView.swift          # Configuration interface
 ├── OverlayView.swift           # Fullscreen display overlay
