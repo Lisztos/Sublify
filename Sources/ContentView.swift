@@ -9,7 +9,7 @@ struct ContentView: View {
                                     Text("Sublify")
                 .font(.largeTitle)
                 .fontWeight(.bold)
-            
+
             Text("Subliminal motivation made simple")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
