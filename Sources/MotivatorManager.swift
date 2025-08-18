@@ -97,8 +97,8 @@ class MotivatorManager: ObservableObject {
 }
 
 struct MotivatorSettings: Codable {
-    var intervalMinutes: Int = 30
-    var displayDurationMs: Int = 3000
+    var intervalMinutes: Int = 1  // Default to 1 minute for testing
+    var displayDurationMs: Int = 125  // Recommended subliminal duration
     var motivationText: String = "You're doing great! Keep going! 💪"
     var useCustomImage: Bool = false
     var customImagePath: String = ""

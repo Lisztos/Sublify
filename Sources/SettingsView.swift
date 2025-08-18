@@ -42,16 +42,23 @@ struct SettingsView: View {
                             .font(.headline)
                             .foregroundColor(.primary)
 
-                        VStack(spacing: 8) {
+                                                VStack(spacing: 8) {
                             HStack {
                                 Text("Show every:")
                                     .frame(width: 120, alignment: .leading)
-                                TextField("Minutes", value: $motivatorManager.settings.intervalMinutes, format: .number)
+                                TextField("Minutes", value: Binding(
+                                    get: { motivatorManager.settings.intervalMinutes },
+                                    set: { motivatorManager.settings.intervalMinutes = min(max($0, 1), 60) }
+                                ), format: .number)
                                     .textFieldStyle(.roundedBorder)
                                     .frame(width: 80)
                                 Text("minutes")
                                 Spacer()
                             }
+                            Text("(Max: 60 minutes)")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                                .frame(maxWidth: .infinity, alignment: .leading)
 
                             HStack {
                                 Text("Display for:")
@@ -62,6 +69,28 @@ struct SettingsView: View {
                                 Text("ms")
                                 Spacer()
                             }
+
+                            HStack {
+                                Button("125ms (Recommended)") {
+                                    motivatorManager.settings.displayDurationMs = 125
+                                }
+                                .buttonStyle(.bordered)
+                                .controlSize(.small)
+
+                                Button("3000ms (Visible)") {
+                                    motivatorManager.settings.displayDurationMs = 3000
+                                }
+                                .buttonStyle(.bordered)
+                                .controlSize(.small)
+
+                                Spacer()
+                            }
+                            .padding(.top, 4)
+
+                            Text("125ms = Subliminal influence, 3000ms = Clearly visible")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                                .frame(maxWidth: .infinity, alignment: .leading)
                         }
                         .padding()
                         .background(Color(NSColor.controlBackgroundColor))
