@@ -6,115 +6,180 @@ struct SettingsView: View {
     @State private var showingImagePicker = false
 
     var body: some View {
-        NavigationView {
-            Form {
-                Section("Timing") {
-                    HStack {
-                        Text("Show every:")
-                        Spacer()
-                        TextField("Minutes", value: $motivatorManager.settings.intervalMinutes, format: .number)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(width: 80)
-                        Text("minutes")
-                    }
-
-                    HStack {
-                        Text("Display for:")
-                        Spacer()
-                        TextField("Milliseconds", value: $motivatorManager.settings.displayDurationMs, format: .number)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(width: 80)
-                        Text("ms")
-                    }
+        VStack(spacing: 0) {
+            // Header
+            HStack {
+                Button("Cancel") {
+                    dismiss()
                 }
+                .buttonStyle(.bordered)
 
-                Section("Content") {
-                    Toggle("Use custom image", isOn: $motivatorManager.settings.useCustomImage)
+                Spacer()
 
-                    if motivatorManager.settings.useCustomImage {
-                        VStack(alignment: .leading) {
+                Text("Settings")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+
+                Spacer()
+
+                Button("Save") {
+                    motivatorManager.saveSettings()
+                    dismiss()
+                }
+                .buttonStyle(.borderedProminent)
+            }
+            .padding()
+            .background(Color(NSColor.controlBackgroundColor))
+
+            Divider()
+
+            // Content
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                                                    // Timing Section
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Timing")
+                            .font(.headline)
+                            .foregroundColor(.primary)
+
+                        VStack(spacing: 8) {
                             HStack {
-                                Text("Image path:")
+                                Text("Show every:")
+                                    .frame(width: 120, alignment: .leading)
+                                TextField("Minutes", value: $motivatorManager.settings.intervalMinutes, format: .number)
+                                    .textFieldStyle(.roundedBorder)
+                                    .frame(width: 80)
+                                Text("minutes")
                                 Spacer()
-                                Button("Browse") {
-                                    showingImagePicker = true
-                                }
                             }
 
-                            TextField("Path to image file", text: $motivatorManager.settings.customImagePath)
-                                .textFieldStyle(.roundedBorder)
+                            HStack {
+                                Text("Display for:")
+                                    .frame(width: 120, alignment: .leading)
+                                TextField("Milliseconds", value: $motivatorManager.settings.displayDurationMs, format: .number)
+                                    .textFieldStyle(.roundedBorder)
+                                    .frame(width: 80)
+                                Text("ms")
+                                Spacer()
+                            }
                         }
-                    } else {
-                        VStack(alignment: .leading) {
-                            Text("Motivation text:")
-                            TextEditor(text: $motivatorManager.settings.motivationText)
-                                .frame(height: 80)
-                                .border(Color.gray.opacity(0.3))
-                        }
-                    }
-                }
-
-                Section("Appearance") {
-                    HStack {
-                        Text("Background color:")
-                        Spacer()
-                        Picker("Background", selection: $motivatorManager.settings.backgroundColor) {
-                            Text("Blue").tag("blue")
-                            Text("Green").tag("green")
-                            Text("Purple").tag("purple")
-                            Text("Orange").tag("orange")
-                            Text("Red").tag("red")
-                            Text("Black").tag("black")
-                        }
-                        .pickerStyle(.menu)
+                        .padding()
+                        .background(Color(NSColor.controlBackgroundColor))
+                        .cornerRadius(8)
                     }
 
-                    HStack {
-                        Text("Text color:")
-                        Spacer()
-                        Picker("Text Color", selection: $motivatorManager.settings.textColor) {
-                            Text("White").tag("white")
-                            Text("Black").tag("black")
-                            Text("Yellow").tag("yellow")
-                            Text("Cyan").tag("cyan")
+                                    // Content Section
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Content")
+                            .font(.headline)
+                            .foregroundColor(.primary)
+
+                        VStack(alignment: .leading, spacing: 12) {
+                            Toggle("Use custom image", isOn: $motivatorManager.settings.useCustomImage)
+
+                            if motivatorManager.settings.useCustomImage {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    HStack {
+                                        Text("Image path:")
+                                            .font(.subheadline)
+                                            .fontWeight(.medium)
+                                        Spacer()
+                                        Button("Browse...") {
+                                            showingImagePicker = true
+                                        }
+                                        .buttonStyle(.bordered)
+                                    }
+
+                                    TextField("Select an image file using Browse button", text: $motivatorManager.settings.customImagePath)
+                                        .textFieldStyle(.roundedBorder)
+                                        .disabled(true)
+                                }
+                            } else {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text("Motivation text:")
+                                        .font(.subheadline)
+                                        .fontWeight(.medium)
+                                    TextEditor(text: $motivatorManager.settings.motivationText)
+                                        .frame(height: 100)
+                                        .padding(4)
+                                        .background(Color(.textBackgroundColor))
+                                        .cornerRadius(6)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 6)
+                                                .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                                        )
+                                }
+                            }
                         }
-                        .pickerStyle(.menu)
+                        .padding()
+                        .background(Color(NSColor.controlBackgroundColor))
+                        .cornerRadius(8)
                     }
 
-                    HStack {
-                        Text("Font size:")
-                        Spacer()
-                        TextField("Size", value: $motivatorManager.settings.fontSize, format: .number)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(width: 80)
-                        Text("pt")
-                    }
-                }
+                                    // Appearance Section
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Appearance")
+                            .font(.headline)
+                            .foregroundColor(.primary)
 
-                Section {
+                        VStack(spacing: 8) {
+                            HStack {
+                                Text("Background color:")
+                                    .frame(width: 120, alignment: .leading)
+                                Picker("Background", selection: $motivatorManager.settings.backgroundColor) {
+                                    Text("Blue").tag("blue")
+                                    Text("Green").tag("green")
+                                    Text("Purple").tag("purple")
+                                    Text("Orange").tag("orange")
+                                    Text("Red").tag("red")
+                                    Text("Black").tag("black")
+                                }
+                                .pickerStyle(.menu)
+                                .frame(width: 100)
+                                Spacer()
+                            }
+
+                            HStack {
+                                Text("Text color:")
+                                    .frame(width: 120, alignment: .leading)
+                                Picker("Text Color", selection: $motivatorManager.settings.textColor) {
+                                    Text("White").tag("white")
+                                    Text("Black").tag("black")
+                                    Text("Yellow").tag("yellow")
+                                    Text("Cyan").tag("cyan")
+                                }
+                                .pickerStyle(.menu)
+                                .frame(width: 100)
+                                Spacer()
+                            }
+
+                            HStack {
+                                Text("Font size:")
+                                    .frame(width: 120, alignment: .leading)
+                                TextField("Size", value: $motivatorManager.settings.fontSize, format: .number)
+                                    .textFieldStyle(.roundedBorder)
+                                    .frame(width: 80)
+                                Text("pt")
+                                Spacer()
+                            }
+                        }
+                        .padding()
+                        .background(Color(NSColor.controlBackgroundColor))
+                        .cornerRadius(8)
+                    }
+
+                                    // Test Button
                     Button("Test Display") {
                         testDisplay()
                     }
                     .frame(maxWidth: .infinity)
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
                 }
-            }
-            .navigationTitle("Settings")
-                        .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                }
-
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        motivatorManager.saveSettings()
-                        dismiss()
-                    }
-                }
+                .padding()
             }
         }
-        .frame(width: 500, height: 600)
+        .frame(width: 600, height: 700)
         .fileImporter(
             isPresented: $showingImagePicker,
             allowedContentTypes: [.image],

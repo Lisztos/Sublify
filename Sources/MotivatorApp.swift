@@ -15,8 +15,8 @@ struct MotivatorApp: App {
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
-        // Hide dock icon
-        NSApp.setActivationPolicy(.accessory)
+        // Show dock icon for testing
+        NSApp.setActivationPolicy(.regular)
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ app: NSApplication) -> Bool {
