@@ -6,11 +6,11 @@ struct ContentView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            Text("Motivator")
+                        Text("Subliminal Motivator")
                 .font(.largeTitle)
                 .fontWeight(.bold)
-
-            Text("Your personal motivation companion")
+            
+            Text("Subconscious motivation through brief visual cues")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
 
