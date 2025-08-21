@@ -102,7 +102,33 @@ struct MotivatorSettings: Codable {
     var motivationText: String = "You're doing great! Keep going! 💪"
     var useCustomImage: Bool = false
     var customImagePath: String = ""
-    var backgroundColor: String = "blue"
-    var textColor: String = "white"
+    var backgroundColorData: Data = Color.blue.colorData
+    var textColorData: Data = Color.white.colorData
     var fontSize: Int = 48
+
+    // Computed properties for easy access to Color objects
+    var backgroundColor: Color {
+        get { Color.fromData(backgroundColorData) ?? Color.blue }
+        set { backgroundColorData = newValue.colorData }
+    }
+
+    var textColor: Color {
+        get { Color.fromData(textColorData) ?? Color.white }
+        set { textColorData = newValue.colorData }
+    }
+}
+
+// Extension to handle Color encoding/decoding
+extension Color {
+    var colorData: Data {
+        let nsColor = NSColor(self)
+        return try! NSKeyedArchiver.archivedData(withRootObject: nsColor, requiringSecureCoding: false)
+    }
+
+    static func fromData(_ data: Data) -> Color? {
+        guard let nsColor = try? NSKeyedUnarchiver.unarchivedObject(ofClass: NSColor.self, from: data) else {
+            return nil
+        }
+        return Color(nsColor)
+    }
 }

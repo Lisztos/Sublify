@@ -12,6 +12,7 @@
 		A1234567890123456789012E /* MotivatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890123456789012F /* MotivatorManager.swift */; };
 		A1234567890123456789012G /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890123456789012H /* OverlayView.swift */; };
 		A1234567890123456789012I /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890123456789012J /* SettingsView.swift */; };
+		APPICONBUILD123456789012 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = APPICON123456789012345678 /* AppIcon.appiconset */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		A1234567890123456789012H /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		A1234567890123456789012J /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A1234567890123456789012L /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		APPICON123456789012345678 /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.appiconset; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +46,7 @@
 				A1234567890123456789012H /* OverlayView.swift */,
 				A1234567890123456789012J /* SettingsView.swift */,
 				A1234567890123456789012L /* Info.plist */,
+				APPICON123456789012345678 /* AppIcon.appiconset */,
 			);
 			path = Sublify;
 			sourceTree = "<group>";
@@ -122,6 +125,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				APPICONBUILD123456789012 /* AppIcon.appiconset in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

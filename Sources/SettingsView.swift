@@ -155,30 +155,16 @@ struct SettingsView: View {
                             HStack {
                                 Text("Background color:")
                                     .frame(width: 120, alignment: .leading)
-                                Picker("Background", selection: $motivatorManager.settings.backgroundColor) {
-                                    Text("Blue").tag("blue")
-                                    Text("Green").tag("green")
-                                    Text("Purple").tag("purple")
-                                    Text("Orange").tag("orange")
-                                    Text("Red").tag("red")
-                                    Text("Black").tag("black")
-                                }
-                                .pickerStyle(.menu)
-                                .frame(width: 100)
+                                ColorPicker("", selection: $motivatorManager.settings.backgroundColor, supportsOpacity: false)
+                                    .frame(width: 100)
                                 Spacer()
                             }
 
                             HStack {
                                 Text("Text color:")
                                     .frame(width: 120, alignment: .leading)
-                                Picker("Text Color", selection: $motivatorManager.settings.textColor) {
-                                    Text("White").tag("white")
-                                    Text("Black").tag("black")
-                                    Text("Yellow").tag("yellow")
-                                    Text("Cyan").tag("cyan")
-                                }
-                                .pickerStyle(.menu)
-                                .frame(width: 100)
+                                ColorPicker("", selection: $motivatorManager.settings.textColor, supportsOpacity: false)
+                                    .frame(width: 100)
                                 Spacer()
                             }
 

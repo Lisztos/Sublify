@@ -1,3 +1,22 @@
+<p align="center">
+  <img src="Assets/Branding/images/banner.png" alt="Sublify Banner" width="100%">
+</p>
+
+# Sublify
+
+**Shape your subconscious.**
+
+Sublify is a minimal open-source app that helps you display subliminal messages on your screen.
+It flashes short, positive cues at regular intervals to help reinforce habits, boost confidence, or simply remind your subconscious of what matters most.
+
+---
+
+## 🚀 Features
+- Display short subliminal messages at configurable intervals
+- Minimal design, distraction-free
+- Fully open source and easy to extend
+
+---
 # Sublify - Subliminal Motivation for macOS
 
 A sleek macOS desktop app that delivers personalized motivational messages using subliminal timing (125ms) or visible durations. Sublify makes subconscious motivation simple and effective for boosting your productivity throughout the day.

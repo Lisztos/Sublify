@@ -49,37 +49,11 @@ struct OverlayView: View {
     }
 
     private var backgroundColor: Color {
-        switch settings.backgroundColor {
-        case "blue":
-            return Color.blue
-        case "green":
-            return Color.green
-        case "purple":
-            return Color.purple
-        case "orange":
-            return Color.orange
-        case "red":
-            return Color.red
-        case "black":
-            return Color.black
-        default:
-            return Color.blue
-        }
+        return settings.backgroundColor
     }
 
     private var textColor: Color {
-        switch settings.textColor {
-        case "white":
-            return Color.white
-        case "black":
-            return Color.black
-        case "yellow":
-            return Color.yellow
-        case "cyan":
-            return Color.cyan
-        default:
-            return Color.white
-        }
+        return settings.textColor
     }
 
     private func loadCustomImage() -> NSImage? {
