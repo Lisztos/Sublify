@@ -12,11 +12,12 @@ extension Color {
   static let sublifyPrimary = sublifyPurple
   static let sublifySecondary = sublifyViolet
   static let sublifyAccent = sublifyLightBlue
-  static let sublifyBackground = Color(hex: "FAFBFC")
+  static let sublifyBackground = Color(hex: "F1F5F9")
   static let sublifyCardBackground = Color.white
+  static let sublifyCardBackgroundSecondary = Color(hex: "F8FAFC")
   static let sublifyText = Color(hex: "1F2937")
-  static let sublifyTextSecondary = Color(hex: "6B7280")
-  static let sublifyBorder = Color(hex: "E5E7EB")
+  static let sublifyTextSecondary = Color(hex: "64748B")
+  static let sublifyBorder = Color(hex: "CBD5E1")
 
   // Status colors
   static let sublifySuccess = Color(hex: "10B981")
@@ -209,15 +210,18 @@ struct SublifyStatusBadge: View {
 // MARK: - Input Field Style
 struct SublifyTextFieldStyle: TextFieldStyle {
   func _body(configuration: TextField<Self._Label>) -> some View {
-      configuration
+    configuration
       .font(.sublifyBody)
-      .padding(SublifySpacing.md)
+      .foregroundColor(.sublifyText)
+      .padding(.horizontal, SublifySpacing.md)
+      .padding(.vertical, SublifySpacing.sm)
       .background(Color.sublifyCardBackground)
       .overlay(
-          RoundedRectangle(cornerRadius: SublifyRadius.md)
-    .stroke(Color.sublifyBorder, lineWidth: 1)
+        RoundedRectangle(cornerRadius: SublifyRadius.md)
+          .stroke(Color.sublifyBorder, lineWidth: 1.5)
       )
       .cornerRadius(SublifyRadius.md)
+      .shadow(color: Color.black.opacity(0.02), radius: 1, x: 0, y: 1)
   }
 }
 
@@ -259,20 +263,24 @@ struct SublifyCleanBackground: View {
 struct SublifyModernCard<Content: View>: View {
   let content: Content
   let hasBorder: Bool
+  let useSecondaryBackground: Bool
 
-  init(hasBorder: Bool = true, @ViewBuilder content: () -> Content) {
-      self.hasBorder = hasBorder
-      self.content = content()
+  init(hasBorder: Bool = true, useSecondaryBackground: Bool = false, @ViewBuilder content: () -> Content) {
+    self.hasBorder = hasBorder
+    self.useSecondaryBackground = useSecondaryBackground
+    self.content = content()
   }
 
   var body: some View {
-      content
+    content
       .padding(SublifySpacing.xl)
-      .background(Color.sublifyCardBackground)
+      .background(useSecondaryBackground ? Color.sublifyCardBackgroundSecondary : Color.sublifyCardBackground)
       .overlay(
-          RoundedRectangle(cornerRadius: SublifyRadius.lg)
-    .stroke(hasBorder ? Color.sublifyBorder : Color.clear, lineWidth: 1)
+        RoundedRectangle(cornerRadius: SublifyRadius.lg)
+          .stroke(hasBorder ? Color.sublifyBorder.opacity(0.6) : Color.clear, lineWidth: 1)
       )
       .cornerRadius(SublifyRadius.lg)
+      .shadow(color: Color.black.opacity(0.12), radius: 12, x: 0, y: 4)
+      .shadow(color: Color.black.opacity(0.06), radius: 3, x: 0, y: 1)
   }
 }

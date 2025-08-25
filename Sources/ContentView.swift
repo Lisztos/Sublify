@@ -10,27 +10,52 @@ struct ContentView: View {
       SublifyCleanBackground()
 
       VStack(spacing: SublifySpacing.xxl) {
-        // Modern Header Section
-        VStack(spacing: SublifySpacing.lg) {
-          // Clean App Icon
-          RoundedRectangle(cornerRadius: SublifyRadius.lg)
-            .fill(Color.sublifyPrimary)
-            .frame(width: 56, height: 56)
-            .overlay(
-              Image(systemName: "brain.head.profile")
-                .font(.system(size: 24, weight: .semibold))
-                .foregroundColor(.white)
-            )
+        // Header with Settings Button in Top Right
+        ZStack {
+          // Centered App Icon and Title
+          VStack(spacing: SublifySpacing.lg) {
+            // Clean App Icon
+            RoundedRectangle(cornerRadius: SublifyRadius.lg)
+              .fill(Color.sublifyPrimary)
+              .frame(width: 56, height: 56)
+              .overlay(
+                Image(systemName: "brain.head.profile")
+                  .font(.system(size: 24, weight: .semibold))
+                  .foregroundColor(.white)
+              )
 
-          VStack(spacing: SublifySpacing.xs) {
-            Text("Sublify")
-              .font(.system(size: 28, weight: .bold, design: .default))
-              .foregroundColor(.sublifyText)
+            VStack(spacing: SublifySpacing.xs) {
+              Text("Sublify")
+                .font(.system(size: 28, weight: .bold, design: .default))
+                .foregroundColor(.sublifyText)
 
-            Text("Subliminal motivation made simple")
-              .font(.sublifyBody)
-              .foregroundColor(.sublifyTextSecondary)
-              .multilineTextAlignment(.center)
+              Text("Subliminal motivation made simple")
+                .font(.sublifyBody)
+                .foregroundColor(.sublifyTextSecondary)
+                .multilineTextAlignment(.center)
+            }
+          }
+          .frame(maxWidth: .infinity)
+          
+          // Settings Button - Top Right
+          HStack {
+            Spacer()
+            VStack {
+              Button(action: {
+                showingSettings = true
+              }) {
+                HStack(spacing: 4) {
+                  Image(systemName: "gearshape")
+                    .font(.system(size: 16, weight: .medium))
+                  Text("Settings")
+                    .font(.system(size: 14, weight: .medium))
+                }
+                .foregroundColor(.sublifyTextSecondary)
+              }
+              .buttonStyle(.plain)
+              
+              Spacer()
+            }
           }
         }
 
@@ -53,7 +78,7 @@ struct ContentView: View {
           // Stats Grid
           HStack(spacing: SublifySpacing.lg) {
             // Interval Stat
-            SublifyModernCard(hasBorder: false) {
+            SublifyModernCard(hasBorder: true, useSecondaryBackground: false) {
               VStack(spacing: SublifySpacing.xs) {
                 Text("Interval")
                   .font(.sublifyCaption)
@@ -70,7 +95,7 @@ struct ContentView: View {
             }
 
             // Duration Stat
-            SublifyModernCard(hasBorder: false) {
+            SublifyModernCard(hasBorder: true, useSecondaryBackground: false) {
               VStack(spacing: SublifySpacing.xs) {
                 Text("Duration")
                   .font(.sublifyCaption)
@@ -88,26 +113,17 @@ struct ContentView: View {
           }
         }
 
-        // Action Buttons
-        VStack(spacing: SublifySpacing.md) {
-          Button(sublifyManager.isRunning ? "Stop Session" : "Start Session") {
-            if sublifyManager.isRunning {
-              sublifyManager.stop()
-            } else {
-              sublifyManager.start()
-            }
+                // Main Action Button
+        Button(sublifyManager.isRunning ? "Stop Session" : "Start Session") {
+          if sublifyManager.isRunning {
+            sublifyManager.stop()
+          } else {
+            sublifyManager.start()
           }
-          .buttonStyle(SublifyPrimaryButtonStyle())
-          .frame(maxWidth: .infinity)
-          .frame(height: 44)
-
-          Button("Settings") {
-            showingSettings = true
-          }
-          .buttonStyle(SublifySecondaryButtonStyle())
-          .frame(maxWidth: .infinity)
-          .frame(height: 44)
         }
+        .buttonStyle(SublifyPrimaryButtonStyle())
+        .frame(maxWidth: .infinity)
+        .frame(height: 44)
 
         Spacer()
       }
