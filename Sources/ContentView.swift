@@ -10,52 +10,27 @@ struct ContentView: View {
       SublifyCleanBackground()
 
       VStack(spacing: SublifySpacing.xxl) {
-        // Header with Settings Button in Top Right
-        ZStack {
-          // Centered App Icon and Title
-          VStack(spacing: SublifySpacing.lg) {
-            // Clean App Icon
-            RoundedRectangle(cornerRadius: SublifyRadius.lg)
-              .fill(Color.sublifyPrimary)
-              .frame(width: 56, height: 56)
-              .overlay(
-                Image(systemName: "brain.head.profile")
-                  .font(.system(size: 24, weight: .semibold))
-                  .foregroundColor(.white)
-              )
+        // Clean Header - Centered App Icon and Title
+        VStack(spacing: SublifySpacing.lg) {
+          // Clean App Icon
+          RoundedRectangle(cornerRadius: SublifyRadius.lg)
+            .fill(Color.sublifyPrimary)
+            .frame(width: 56, height: 56)
+            .overlay(
+              Image(systemName: "brain.head.profile")
+                .font(.system(size: 24, weight: .semibold))
+                .foregroundColor(.white)
+            )
 
-            VStack(spacing: SublifySpacing.xs) {
-              Text("Sublify")
-                .font(.system(size: 28, weight: .bold, design: .default))
-                .foregroundColor(.sublifyText)
+          VStack(spacing: SublifySpacing.xs) {
+            Text("Sublify")
+              .font(.system(size: 28, weight: .bold, design: .default))
+              .foregroundColor(.sublifyText)
 
-              Text("Subliminal motivation made simple")
-                .font(.sublifyBody)
-                .foregroundColor(.sublifyTextSecondary)
-                .multilineTextAlignment(.center)
-            }
-          }
-          .frame(maxWidth: .infinity)
-          
-          // Settings Button - Top Right
-          HStack {
-            Spacer()
-            VStack {
-              Button(action: {
-                showingSettings = true
-              }) {
-                HStack(spacing: 4) {
-                  Image(systemName: "gearshape")
-                    .font(.system(size: 16, weight: .medium))
-                  Text("Settings")
-                    .font(.system(size: 14, weight: .medium))
-                }
-                .foregroundColor(.sublifyTextSecondary)
-              }
-              .buttonStyle(.plain)
-              
-              Spacer()
-            }
+            Text("Subliminal motivation made simple")
+              .font(.sublifyBody)
+              .foregroundColor(.sublifyTextSecondary)
+              .multilineTextAlignment(.center)
           }
         }
 
@@ -125,7 +100,24 @@ struct ContentView: View {
         .frame(maxWidth: .infinity)
         .frame(height: 44)
 
-        Spacer()
+
+                // Settings Button - Bottom Right
+        HStack {
+          Spacer()
+
+          Button(action: {
+            showingSettings = true
+          }) {
+            HStack(spacing: 4) {
+              Image(systemName: "gearshape")
+                .font(.system(size: 16, weight: .medium))
+              Text("Settings")
+                .font(.system(size: 14, weight: .medium))
+            }
+            .foregroundColor(.sublifyTextSecondary)
+          }
+          .buttonStyle(.plain)
+        }
       }
       .padding(SublifySpacing.xxl)
     }

@@ -9,16 +9,16 @@ struct SettingsView: View {
   var body: some View {
     VStack(spacing: 0) {
       SettingsHeader(sublifyManager: sublifyManager, dismiss: dismiss)
-      
+
       ScrollView(.vertical, showsIndicators: false) {
         VStack(spacing: SublifySpacing.lg) {
           TimingSection(sublifyManager: sublifyManager, hoveredPreset: $hoveredPreset)
             .padding(.top, SublifySpacing.sm)
-          
+
           ContentSection(sublifyManager: sublifyManager, showingImagePicker: $showingImagePicker)
-          
+
           AppearanceSection(sublifyManager: sublifyManager)
-          
+
           PreviewSection(sublifyManager: sublifyManager, testDisplay: testDisplay)
         }
         .padding(.horizontal, SublifySpacing.xl)
@@ -44,28 +44,28 @@ struct SettingsView: View {
       }
     }
   }
-  
+
   private func testDisplay() {
     let screen = NSScreen.main ?? NSScreen.screens.first!
     let overlayView = OverlayView(settings: sublifyManager.settings)
-    
+
     let testWindow = NSWindow(
       contentRect: screen.frame,
       styleMask: [.borderless],
       backing: .buffered,
       defer: false
     )
-    
+
     testWindow.contentView = NSHostingView(rootView: overlayView)
     testWindow.backgroundColor = NSColor.clear
     testWindow.isOpaque = false
     testWindow.level = .screenSaver
     testWindow.makeKeyAndOrderFront(nil)
-    
+
     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
       testWindow.orderOut(nil)
     }
-    
+
     let clickGesture = NSClickGestureRecognizer { _ in
       testWindow.orderOut(nil)
     }
@@ -77,7 +77,7 @@ struct SettingsView: View {
 struct SettingsHeader: View {
   @ObservedObject var sublifyManager: SublifyManager
   let dismiss: DismissAction
-  
+
   var body: some View {
     ZStack {
       LinearGradient(
@@ -85,7 +85,7 @@ struct SettingsHeader: View {
         startPoint: .topLeading,
         endPoint: .bottomTrailing
       )
-      
+
       VStack(spacing: SublifySpacing.xs) {
         HStack {
           Button(action: { dismiss() }) {
@@ -102,22 +102,22 @@ struct SettingsHeader: View {
           .padding(.vertical, SublifySpacing.sm)
           .background(Color.sublifyCardBackground.opacity(0.8))
           .cornerRadius(SublifyRadius.md)
-          
+
           Spacer()
-          
+
           Button("Save Changes") {
             sublifyManager.saveSettings()
             dismiss()
           }
-          .buttonStyle(SublifyPrimaryButtonStyle())
+          .buttonStyle(SublifySecondaryButtonStyle())
         }
-        
+
         Text("Settings")
           .font(.system(size: 28, weight: .bold, design: .default))
           .foregroundColor(.sublifyText)
           .frame(maxWidth: .infinity, alignment: .leading)
           .padding(.top, SublifySpacing.xs)
-        
+
         Text("Customize your subliminal experience")
           .font(.sublifyBody)
           .foregroundColor(.sublifyTextSecondary)
@@ -134,7 +134,7 @@ struct SettingsHeader: View {
 struct TimingSection: View {
   @ObservedObject var sublifyManager: SublifyManager
   @Binding var hoveredPreset: String?
-  
+
   var body: some View {
     VStack(alignment: .leading, spacing: SublifySpacing.xs) {
       Label {
@@ -146,7 +146,7 @@ struct TimingSection: View {
           .foregroundColor(.sublifyPrimary)
           .font(.system(size: 14))
       }
-      
+
       VStack(spacing: 0) {
         TimingRow(
           title: "Display Frequency",
@@ -157,10 +157,10 @@ struct TimingSection: View {
           ),
           unit: "min"
         )
-        
+
         Divider()
           .background(Color.sublifyBorder.opacity(0.5))
-        
+
         TimingRow(
           title: "Display Duration",
           subtitle: "How long each message appears",
@@ -173,7 +173,7 @@ struct TimingSection: View {
         RoundedRectangle(cornerRadius: SublifyRadius.lg)
           .stroke(Color.sublifyBorder.opacity(0.3), lineWidth: 1)
       )
-      
+
       TimingPresets(
         currentValue: sublifyManager.settings.displayDurationMs,
         onSelect: { sublifyManager.settings.displayDurationMs = $0 },
@@ -189,7 +189,7 @@ struct TimingRow: View {
   let subtitle: String
   @Binding var value: Int
   let unit: String
-  
+
   var body: some View {
     HStack {
       VStack(alignment: .leading, spacing: 2) {
@@ -200,15 +200,15 @@ struct TimingRow: View {
           .font(.system(size: 11))
           .foregroundColor(.sublifyTextSecondary)
       }
-      
+
       Spacer()
-      
+
       HStack(spacing: SublifySpacing.xs) {
         TextField("", value: $value, format: .number)
           .multilineTextAlignment(.center)
           .frame(width: 60)
           .textFieldStyle(CompactTextFieldStyle())
-        
+
         Text(unit)
           .font(.system(size: 12))
           .foregroundColor(.sublifyTextSecondary)
@@ -224,13 +224,13 @@ struct TimingPresets: View {
   let currentValue: Int
   let onSelect: (Int) -> Void
   @Binding var hoveredPreset: String?
-  
+
   let presets = [
     ("Subliminal", 125),
     ("Brief", 500),
     ("Visible", 3000)
   ]
-  
+
   var body: some View {
     HStack(spacing: SublifySpacing.sm) {
       ForEach(presets, id: \.0) { preset in
@@ -263,7 +263,7 @@ struct PresetButton: View {
   let isHovered: Bool
   let action: () -> Void
   let onHover: (Bool) -> Void
-  
+
   var body: some View {
     Button(action: action) {
       VStack(spacing: 2) {
@@ -283,7 +283,7 @@ struct PresetButton: View {
     .scaleEffect(isHovered ? 1.02 : 1.0)
     .onHover(perform: onHover)
   }
-  
+
   @ViewBuilder
   private var backgroundGradient: some View {
     if isSelected {
@@ -296,7 +296,7 @@ struct PresetButton: View {
       Color.sublifyCardBackground.opacity(0.8)
     }
   }
-  
+
   private var borderOverlay: some View {
     RoundedRectangle(cornerRadius: SublifyRadius.sm)
       .stroke(
@@ -310,7 +310,7 @@ struct PresetButton: View {
 struct ContentSection: View {
   @ObservedObject var sublifyManager: SublifyManager
   @Binding var showingImagePicker: Bool
-  
+
   var body: some View {
     VStack(alignment: .leading, spacing: SublifySpacing.xs) {
       Label {
@@ -322,10 +322,10 @@ struct ContentSection: View {
           .foregroundColor(.sublifyPrimary)
           .font(.system(size: 14))
       }
-      
+
       VStack(spacing: 0) {
         ContentToggleRow(sublifyManager: sublifyManager)
-        
+
         if sublifyManager.settings.useCustomImage {
           Divider()
             .background(Color.sublifyBorder.opacity(0.5))
@@ -351,7 +351,7 @@ struct ContentSection: View {
 // MARK: - Content Toggle Row
 struct ContentToggleRow: View {
   @ObservedObject var sublifyManager: SublifyManager
-  
+
   var body: some View {
     HStack {
       Label {
@@ -363,9 +363,9 @@ struct ContentToggleRow: View {
           .foregroundColor(.sublifyPrimary.opacity(0.8))
           .font(.system(size: 12))
       }
-      
+
       Spacer()
-      
+
       Toggle("", isOn: $sublifyManager.settings.useCustomImage)
         .toggleStyle(SublifyToggleStyle())
     }
@@ -378,22 +378,22 @@ struct ContentToggleRow: View {
 struct ImagePickerRow: View {
   let imagePath: String
   let showPicker: () -> Void
-  
+
   var body: some View {
     VStack(spacing: SublifySpacing.sm) {
       HStack {
         Image(systemName: "folder.fill")
           .foregroundColor(.sublifyTextSecondary)
           .font(.system(size: 12))
-        
+
         Text(fileName)
           .font(.system(size: 12))
           .foregroundColor(imagePath.isEmpty ? .sublifyTextSecondary : .sublifyText)
           .lineLimit(1)
           .truncationMode(.middle)
-        
+
         Spacer()
-        
+
         Button("Browse", action: showPicker)
           .font(.system(size: 11, weight: .semibold))
           .foregroundColor(.sublifyPrimary)
@@ -407,7 +407,7 @@ struct ImagePickerRow: View {
     .padding(SublifySpacing.md)
     .background(Color.sublifyCardBackgroundSecondary)
   }
-  
+
   private var fileName: String {
     imagePath.isEmpty ? "No image selected" : URL(fileURLWithPath: imagePath).lastPathComponent
   }
@@ -416,21 +416,21 @@ struct ImagePickerRow: View {
 // MARK: - Text Editor Row
 struct TextEditorRow: View {
   @Binding var text: String
-  
+
   var body: some View {
     VStack(alignment: .leading, spacing: SublifySpacing.sm) {
       HStack {
         Text("Motivational Message")
           .font(.system(size: 12, weight: .medium))
           .foregroundColor(.sublifyTextSecondary)
-        
+
         Spacer()
-        
+
         Text("\(text.count) characters")
           .font(.system(size: 10))
           .foregroundColor(.sublifyTextSecondary.opacity(0.7))
       }
-      
+
       TextEditor(text: $text)
         .font(.system(size: 13))
         .frame(height: 80)
@@ -450,7 +450,7 @@ struct TextEditorRow: View {
 // MARK: - Appearance Section
 struct AppearanceSection: View {
   @ObservedObject var sublifyManager: SublifyManager
-  
+
   var body: some View {
     VStack(alignment: .leading, spacing: SublifySpacing.xs) {
       Label {
@@ -462,19 +462,19 @@ struct AppearanceSection: View {
           .foregroundColor(.sublifyPrimary)
           .font(.system(size: 14))
       }
-      
+
       VStack(spacing: SublifySpacing.md) {
         HStack(spacing: SublifySpacing.md) {
           ColorPickerItem(
             title: "Background",
             color: $sublifyManager.settings.backgroundColor
           )
-          
+
           ColorPickerItem(
             title: "Text",
             color: $sublifyManager.settings.textColor
           )
-          
+
           FontSizeItem(
             fontSize: $sublifyManager.settings.fontSize
           )
@@ -488,18 +488,18 @@ struct AppearanceSection: View {
 struct ColorPickerItem: View {
   let title: String
   @Binding var color: Color
-  
+
   var body: some View {
     VStack(alignment: .leading, spacing: SublifySpacing.xs) {
       Text(title)
         .font(.system(size: 11, weight: .medium))
         .foregroundColor(.sublifyTextSecondary)
-      
+
       HStack {
         ColorPicker("", selection: $color, supportsOpacity: false)
           .labelsHidden()
           .frame(width: 36, height: 36)
-        
+
         Text("Color")
           .font(.system(size: 12))
           .foregroundColor(.sublifyText)
@@ -519,19 +519,19 @@ struct ColorPickerItem: View {
 // MARK: - Font Size Item
 struct FontSizeItem: View {
   @Binding var fontSize: Int
-  
+
   var body: some View {
     VStack(alignment: .leading, spacing: SublifySpacing.xs) {
       Text("Font Size")
         .font(.system(size: 11, weight: .medium))
         .foregroundColor(.sublifyTextSecondary)
-      
+
       HStack {
         TextField("", value: $fontSize, format: .number)
           .multilineTextAlignment(.center)
           .frame(width: 50)
           .textFieldStyle(CompactTextFieldStyle())
-        
+
         Text("pt")
           .font(.system(size: 12))
           .foregroundColor(.sublifyText)
@@ -552,7 +552,7 @@ struct FontSizeItem: View {
 struct PreviewSection: View {
   @ObservedObject var sublifyManager: SublifyManager
   let testDisplay: () -> Void
-  
+
   var body: some View {
     VStack(spacing: SublifySpacing.md) {
       HStack {
@@ -565,12 +565,12 @@ struct PreviewSection: View {
             .foregroundColor(.sublifyTextSecondary)
             .font(.system(size: 11))
         }
-        
+
         Spacer()
       }
-      
+
       PreviewDisplay(sublifyManager: sublifyManager)
-      
+
       Button(action: testDisplay) {
         HStack(spacing: SublifySpacing.sm) {
           Image(systemName: "play.fill")
@@ -601,11 +601,11 @@ struct PreviewSection: View {
 // MARK: - Preview Display
 struct PreviewDisplay: View {
   @ObservedObject var sublifyManager: SublifyManager
-  
+
   var body: some View {
     ZStack {
       sublifyManager.settings.backgroundColor
-      
+
       if sublifyManager.settings.useCustomImage {
         Text("Image Preview")
           .font(.system(size: CGFloat(sublifyManager.settings.fontSize)))
@@ -652,7 +652,7 @@ extension NSClickGestureRecognizer {
     self.action = #selector(handleClick)
     objc_setAssociatedObject(self, &AssociatedKeys.handler, handler, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
   }
-  
+
   @objc private func handleClick() {
     if let handler = objc_getAssociatedObject(self, &AssociatedKeys.handler) as? (NSClickGestureRecognizer) -> Void {
       handler(self)

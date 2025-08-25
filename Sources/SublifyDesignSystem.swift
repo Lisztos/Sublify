@@ -139,8 +139,8 @@ struct SublifySecondaryButtonStyle: ButtonStyle {
       configuration.label
       .font(.sublifyButton)
       .foregroundColor(isEnabled ? .sublifyPrimary : .sublifyTextSecondary)
-      .padding(.horizontal, SublifySpacing.lg)
-      .padding(.vertical, SublifySpacing.md)
+      .padding(.horizontal, SublifySpacing.md)
+      .padding(.vertical, SublifySpacing.sm)
       .background(Color.sublifyCardBackground)
       .overlay(
           RoundedRectangle(cornerRadius: SublifyRadius.md)
