@@ -2,7 +2,7 @@ import SwiftUI
 
 // MARK: - Color Scheme
 extension Color {
-  static let sublifyPurple = Color(hex: "717FFF")
+  static let sublifyPurple = Color(hex: "7A7BFF")
   static let sublifyViolet = Color(hex: "8D73FF")
   static let sublifyBlue = Color(hex: "7091FF")
   static let sublifyLightBlue = Color(hex: "5EA6FF")

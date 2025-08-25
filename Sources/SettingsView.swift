@@ -136,7 +136,7 @@ struct TimingSection: View {
   @Binding var hoveredPreset: String?
 
   var body: some View {
-    VStack(alignment: .leading, spacing: SublifySpacing.xs) {
+    VStack(alignment: .leading, spacing: SublifySpacing.md) {
       Label {
         Text("Timing")
           .font(.sublifyH4)
@@ -638,10 +638,6 @@ struct CompactTextFieldStyle: TextFieldStyle {
       .padding(.vertical, SublifySpacing.sm)
       .background(Color.white)
       .cornerRadius(SublifyRadius.md)
-      .overlay(
-        RoundedRectangle(cornerRadius: SublifyRadius.md)
-          .stroke(Color.sublifyBorder.opacity(0.6), lineWidth: 1.5)
-      )
       .shadow(color: Color.black.opacity(0.02), radius: 1, x: 0, y: 1)
   }
 }

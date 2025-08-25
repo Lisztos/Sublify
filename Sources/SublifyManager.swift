@@ -97,14 +97,14 @@ class SublifyManager: ObservableObject {
 }
 
 struct SublifySettings: Codable {
-  var intervalMinutes: Int = 1  // Default to 1 minute for testing
-  var displayDurationMs: Int = 125  // Recommended subliminal duration
-  var motivationText: String = "You're doing great! Keep going! 💪"
+  var intervalMinutes: Int = 2
+  var displayDurationMs: Int = 125
+  var motivationText: String = "You're great!"
   var useCustomImage: Bool = false
   var customImagePath: String = ""
-  var backgroundColorData: Data = Color.blue.colorData
+  var backgroundColorData: Data = Color.sublifyPrimary.colorData
   var textColorData: Data = Color.white.colorData
-  var fontSize: Int = 48
+  var fontSize: Int = 70
 
   // Computed properties for easy access to Color objects
   var backgroundColor: Color {
