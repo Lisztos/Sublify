@@ -206,7 +206,7 @@ struct TimingRow: View {
       HStack(spacing: SublifySpacing.xs) {
         TextField("", value: $value, format: .number)
           .multilineTextAlignment(.center)
-          .frame(width: 60)
+          .frame(width: 100)
           .textFieldStyle(CompactTextFieldStyle())
 
         Text(unit)
@@ -269,9 +269,10 @@ struct PresetButton: View {
       VStack(spacing: 2) {
         Text(label)
           .font(.system(size: 11, weight: .semibold))
+          .foregroundColor(isSelected ? .sublifyPrimary : .sublifyText)
         Text("\(value)ms")
           .font(.system(size: 10))
-          .foregroundColor(.sublifyTextSecondary)
+          .foregroundColor(isSelected ? .sublifyPrimary.opacity(0.8) : .sublifyTextSecondary)
       }
       .frame(maxWidth: .infinity)
       .padding(.vertical, SublifySpacing.sm)
@@ -288,12 +289,12 @@ struct PresetButton: View {
   private var backgroundGradient: some View {
     if isSelected {
       LinearGradient(
-        colors: [Color.sublifyPrimary.opacity(0.1), Color.sublifySecondary.opacity(0.1)],
+        colors: [Color.sublifyPrimary.opacity(0.15), Color.sublifySecondary.opacity(0.15)],
         startPoint: .leading,
         endPoint: .trailing
       )
     } else {
-      Color.sublifyCardBackground.opacity(0.8)
+      Color.white
     }
   }
 
@@ -529,7 +530,7 @@ struct FontSizeItem: View {
       HStack {
         TextField("", value: $fontSize, format: .number)
           .multilineTextAlignment(.center)
-          .frame(width: 50)
+          .frame(width: 70)
           .textFieldStyle(CompactTextFieldStyle())
 
         Text("pt")
@@ -631,16 +632,17 @@ struct PreviewDisplay: View {
 struct CompactTextFieldStyle: TextFieldStyle {
   func _body(configuration: TextField<Self._Label>) -> some View {
     configuration
-      .font(.system(size: 12, weight: .medium))
+      .font(.system(size: 13, weight: .medium))
       .foregroundColor(.sublifyText)
-      .padding(.horizontal, SublifySpacing.sm)
-      .padding(.vertical, 6)
-      .background(Color.sublifyCardBackgroundSecondary)
-      .cornerRadius(SublifyRadius.sm)
+      .padding(.horizontal, SublifySpacing.md)
+      .padding(.vertical, SublifySpacing.sm)
+      .background(Color.white)
+      .cornerRadius(SublifyRadius.md)
       .overlay(
-        RoundedRectangle(cornerRadius: SublifyRadius.sm)
-          .stroke(Color.sublifyBorder.opacity(0.3), lineWidth: 1)
+        RoundedRectangle(cornerRadius: SublifyRadius.md)
+          .stroke(Color.sublifyBorder.opacity(0.6), lineWidth: 1.5)
       )
+      .shadow(color: Color.black.opacity(0.02), radius: 1, x: 0, y: 1)
   }
 }
 
