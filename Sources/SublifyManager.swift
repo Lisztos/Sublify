@@ -97,12 +97,12 @@ class SublifyManager: ObservableObject {
 }
 
 struct SublifySettings: Codable {
-  var intervalMinutes: Int = 2
+  var intervalMinutes: Int = 1
   var displayDurationMs: Int = 125
   var motivationText: String = "You're great!"
   var useCustomImage: Bool = false
   var customImagePath: String = ""
-  var backgroundColorData: Data = Color.sublifyPrimary.colorData
+  var backgroundColorData: Data = Color.black.colorData
   var textColorData: Data = Color.white.colorData
   var fontSize: Int = 70
 

@@ -102,6 +102,13 @@ struct SettingsHeader: View {
           .padding(.vertical, SublifySpacing.sm)
           .background(Color.sublifyCardBackground.opacity(0.8))
           .cornerRadius(SublifyRadius.md)
+          .onHover { isHovered in
+            if isHovered {
+              NSCursor.pointingHand.set()
+            } else {
+              NSCursor.arrow.set()
+            }
+          }
 
           Spacer()
 
@@ -282,7 +289,14 @@ struct PresetButton: View {
     }
     .buttonStyle(PlainButtonStyle())
     .scaleEffect(isHovered ? 1.02 : 1.0)
-    .onHover(perform: onHover)
+    .onHover { isHovered in
+      onHover(isHovered)
+      if isHovered {
+        NSCursor.pointingHand.set()
+      } else {
+        NSCursor.arrow.set()
+      }
+    }
   }
 
   @ViewBuilder
@@ -313,7 +327,7 @@ struct ContentSection: View {
   @Binding var showingImagePicker: Bool
 
   var body: some View {
-    VStack(alignment: .leading, spacing: SublifySpacing.xs) {
+    VStack(alignment: .leading, spacing: SublifySpacing.md) {
       Label {
         Text("Content")
           .font(.sublifyH4)
@@ -403,6 +417,13 @@ struct ImagePickerRow: View {
           .background(Color.sublifyPrimary.opacity(0.1))
           .cornerRadius(SublifyRadius.sm)
           .buttonStyle(PlainButtonStyle())
+          .onHover { isHovered in
+            if isHovered {
+              NSCursor.pointingHand.set()
+            } else {
+              NSCursor.arrow.set()
+            }
+          }
       }
     }
     .padding(SublifySpacing.md)
@@ -419,7 +440,7 @@ struct TextEditorRow: View {
   @Binding var text: String
 
   var body: some View {
-    VStack(alignment: .leading, spacing: SublifySpacing.sm) {
+    VStack(alignment: .leading, spacing: SublifySpacing.md) {
       HStack {
         Text("Motivational Message")
           .font(.system(size: 12, weight: .medium))
@@ -453,7 +474,7 @@ struct AppearanceSection: View {
   @ObservedObject var sublifyManager: SublifyManager
 
   var body: some View {
-    VStack(alignment: .leading, spacing: SublifySpacing.xs) {
+    VStack(alignment: .leading, spacing: SublifySpacing.md) {
       Label {
         Text("Appearance")
           .font(.sublifyH4)
@@ -559,7 +580,7 @@ struct PreviewSection: View {
       HStack {
         Label {
           Text("Preview")
-            .font(.system(size: 12, weight: .medium))
+            .font(.system(size: 10, weight: .medium))
             .foregroundColor(.sublifyTextSecondary)
         } icon: {
           Image(systemName: "eye.fill")

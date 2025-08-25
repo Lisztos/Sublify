@@ -129,6 +129,13 @@ struct SublifyPrimaryButtonStyle: ButtonStyle {
       .scaleEffect(configuration.isPressed ? 0.98 : 1.0)
       .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
       .sublifyShadow(.medium)
+      .onHover { isHovered in
+        if isHovered {
+          NSCursor.pointingHand.set()
+        } else {
+          NSCursor.arrow.set()
+        }
+      }
   }
 }
 
@@ -149,6 +156,13 @@ struct SublifySecondaryButtonStyle: ButtonStyle {
       .cornerRadius(SublifyRadius.md)
       .scaleEffect(configuration.isPressed ? 0.98 : 1.0)
       .animation(.easeInOut(duration: 0.1), value: configuration.isPressed)
+      .onHover { isHovered in
+        if isHovered {
+          NSCursor.pointingHand.set()
+        } else {
+          NSCursor.arrow.set()
+        }
+      }
   }
 }
 

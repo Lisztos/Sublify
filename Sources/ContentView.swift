@@ -86,6 +86,27 @@ struct ContentView: View {
               }
             }
           }
+
+          // Settings Button
+          HStack {
+            Button(action: {
+              showingSettings = true
+            }) {
+              HStack(spacing: 3) {
+                Text("Customize Settings")
+                  .font(.system(size: 14, weight: .medium))
+              }
+              .foregroundColor(.sublifyTextSecondary)
+            }
+            .buttonStyle(.plain)
+            .onHover { isHovered in
+              if isHovered {
+                NSCursor.pointingHand.set()
+              } else {
+                NSCursor.arrow.set()
+              }
+            }
+          }
         }
 
                 // Main Action Button
@@ -99,24 +120,12 @@ struct ContentView: View {
         .buttonStyle(SublifyPrimaryButtonStyle())
         .frame(maxWidth: .infinity)
         .frame(height: 44)
-
-
-                // Settings Button - Bottom Right
-        HStack {
-          Spacer()
-
-          Button(action: {
-            showingSettings = true
-          }) {
-            HStack(spacing: 4) {
-              Image(systemName: "gearshape")
-                .font(.system(size: 16, weight: .medium))
-              Text("Settings")
-                .font(.system(size: 14, weight: .medium))
-            }
-            .foregroundColor(.sublifyTextSecondary)
+        .onHover { isHovered in
+          if isHovered {
+            NSCursor.pointingHand.set()
+          } else {
+            NSCursor.arrow.set()
           }
-          .buttonStyle(.plain)
         }
       }
       .padding(SublifySpacing.xxl)
