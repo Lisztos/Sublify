@@ -7,21 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A1234567890123456789012A /* MotivatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890123456789012B /* MotivatorApp.swift */; };
+		A1234567890123456789012A /* SublifyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890123456789012B /* SublifyApp.swift */; };
 		A1234567890123456789012C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890123456789012D /* ContentView.swift */; };
-		A1234567890123456789012E /* MotivatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890123456789012F /* MotivatorManager.swift */; };
+		A1234567890123456789012E /* SublifyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890123456789012F /* SublifyManager.swift */; };
 		A1234567890123456789012G /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890123456789012H /* OverlayView.swift */; };
 		A1234567890123456789012I /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890123456789012J /* SettingsView.swift */; };
+		DESIGNSYSTEMBUILD1234567 /* SublifyDesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DESIGNSYSTEM123456789012 /* SublifyDesignSystem.swift */; };
 		APPICONBUILD123456789012 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = APPICON123456789012345678 /* AppIcon.appiconset */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A1234567890123456789012K /* Sublify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sublify.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1234567890123456789012B /* MotivatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivatorApp.swift; sourceTree = "<group>"; };
+		A1234567890123456789012B /* SublifyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SublifyApp.swift; sourceTree = "<group>"; };
 		A1234567890123456789012D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		A1234567890123456789012F /* MotivatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivatorManager.swift; sourceTree = "<group>"; };
+		A1234567890123456789012F /* SublifyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SublifyManager.swift; sourceTree = "<group>"; };
 		A1234567890123456789012H /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		A1234567890123456789012J /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		DESIGNSYSTEM123456789012 /* SublifyDesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SublifyDesignSystem.swift; sourceTree = "<group>"; };
 		A1234567890123456789012L /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		APPICON123456789012345678 /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.appiconset; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -37,18 +39,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A1234567890123456789012N /* Sublify */ = {
+		A1234567890123456789012N /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				A1234567890123456789012B /* MotivatorApp.swift */,
+				A1234567890123456789012B /* SublifyApp.swift */,
 				A1234567890123456789012D /* ContentView.swift */,
-				A1234567890123456789012F /* MotivatorManager.swift */,
+				A1234567890123456789012F /* SublifyManager.swift */,
 				A1234567890123456789012H /* OverlayView.swift */,
 				A1234567890123456789012J /* SettingsView.swift */,
-				A1234567890123456789012L /* Info.plist */,
-				APPICON123456789012345678 /* AppIcon.appiconset */,
+				DESIGNSYSTEM123456789012 /* SublifyDesignSystem.swift */,
 			);
-			path = Sublify;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		A1234567890123456789012O /* Products */ = {
@@ -62,8 +63,10 @@
 		A1234567890123456789012P = {
 			isa = PBXGroup;
 			children = (
-				A1234567890123456789012N /* Sublify */,
+				A1234567890123456789012N /* Sources */,
 				A1234567890123456789012O /* Products */,
+				A1234567890123456789012L /* Info.plist */,
+				APPICON123456789012345678 /* AppIcon.appiconset */,
 			);
 			sourceTree = "<group>";
 		};
@@ -137,10 +140,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1234567890123456789012C /* ContentView.swift in Sources */,
-				A1234567890123456789012E /* MotivatorManager.swift in Sources */,
+				A1234567890123456789012E /* SublifyManager.swift in Sources */,
 				A1234567890123456789012G /* OverlayView.swift in Sources */,
 				A1234567890123456789012I /* SettingsView.swift in Sources */,
-				A1234567890123456789012A /* MotivatorApp.swift in Sources */,
+				DESIGNSYSTEMBUILD1234567 /* SublifyDesignSystem.swift in Sources */,
+				A1234567890123456789012A /* SublifyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
