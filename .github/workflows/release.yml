@@ -32,6 +32,7 @@ jobs:
 
         # Export the app
         xcodebuild \
+          -exportArchive \
           -archivePath build/Sublify.xcarchive \
           -exportPath build \
           -exportOptionsPlist exportOptions.plist
