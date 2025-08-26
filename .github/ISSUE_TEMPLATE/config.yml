@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 GitHub Discussions
+    url: https://github.com/Lisztos/Sublify/discussions
+    about: Ask questions, share ideas, or discuss Sublify with the community
+  - name: 📚 Documentation
+    url: https://github.com/Lisztos/Sublify/blob/main/README.md
+    about: Check the README for setup instructions and usage information
