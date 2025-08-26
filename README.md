@@ -6,7 +6,10 @@
 
 **Shape your subconscious. Reclaim your mind.**
 
----
+![Build Status](https://github.com/Lisztos/Sublify/workflows/Build%20and%20Release/badge.svg)
+[![Latest Release](https://img.shields.io/github/v/release/Lisztos/Sublify)](https://github.com/Lisztos/Sublify/releases/latest)
+[![License](https://img.shields.io/github/license/Lisztos/Sublify)](LICENSE)
+[![macOS](https://img.shields.io/badge/macOS-13.0%2B-blue)](https://www.apple.com/macos)
 
 ## 💡 Motivation
 
