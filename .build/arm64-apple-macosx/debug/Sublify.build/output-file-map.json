@@ -1,0 +1,41 @@
+{
+  "": {
+    "swift-dependencies": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/master.swiftdeps"
+  },
+  "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/Sources/ContentView.swift": {
+    "dependencies": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/ContentView.d",
+    "object": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/ContentView.swift.o",
+    "swiftmodule": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/ContentView~partial.swiftmodule",
+    "swift-dependencies": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/ContentView.swiftdeps"
+  },
+  "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/Sources/OverlayView.swift": {
+    "dependencies": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/OverlayView.d",
+    "object": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/OverlayView.swift.o",
+    "swiftmodule": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/OverlayView~partial.swiftmodule",
+    "swift-dependencies": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/OverlayView.swiftdeps"
+  },
+  "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/Sources/SettingsView.swift": {
+    "dependencies": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/SettingsView.d",
+    "object": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/SettingsView.swift.o",
+    "swiftmodule": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/SettingsView~partial.swiftmodule",
+    "swift-dependencies": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/SettingsView.swiftdeps"
+  },
+  "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/Sources/SublifyApp.swift": {
+    "dependencies": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/SublifyApp.d",
+    "object": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/SublifyApp.swift.o",
+    "swiftmodule": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/SublifyApp~partial.swiftmodule",
+    "swift-dependencies": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/SublifyApp.swiftdeps"
+  },
+  "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/Sources/SublifyDesignSystem.swift": {
+    "dependencies": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/SublifyDesignSystem.d",
+    "object": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/SublifyDesignSystem.swift.o",
+    "swiftmodule": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/SublifyDesignSystem~partial.swiftmodule",
+    "swift-dependencies": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/SublifyDesignSystem.swiftdeps"
+  },
+  "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/Sources/SublifyManager.swift": {
+    "dependencies": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/SublifyManager.d",
+    "object": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/SublifyManager.swift.o",
+    "swiftmodule": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/SublifyManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/adrian.sanchez/Documents/Workspace/Lisztos/Sublify/.build/arm64-apple-macosx/debug/Sublify.build/SublifyManager.swiftdeps"
+  }
+}

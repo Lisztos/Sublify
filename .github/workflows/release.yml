@@ -1,0 +1,93 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+
+    - name: Build app
+      run: |
+        # Build using xcodebuild directly for better control
+        xcodebuild \
+          -project Sublify.xcodeproj \
+          -scheme Sublify \
+          -configuration Release \
+          -derivedDataPath build/DerivedData \
+          -archivePath build/Sublify.xcarchive \
+          archive
+
+        # Export the app
+        xcodebuild \
+          -archivePath build/Sublify.xcarchive \
+          -exportPath build \
+          -exportOptionsPlist exportOptions.plist
+
+    - name: Create distributable ZIP
+      run: |
+        cd build
+        zip -r Sublify-macOS.zip Sublify.app
+
+    - name: Get version from tag
+      id: get_version
+      run: |
+        if [[ $GITHUB_REF == refs/tags/* ]]; then
+          echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+        else
+          echo "VERSION=dev-$(date +%Y%m%d-%H%M%S)" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: |
+          build/Sublify-macOS.zip
+        name: Sublify ${{ steps.get_version.outputs.VERSION }}
+        body: |
+          ## Sublify ${{ steps.get_version.outputs.VERSION }}
+
+          ### 🚀 What's New
+          - Subliminal messaging for positive empowerment
+          - Three timing presets: Subliminal (125ms), Brief (500ms), Visible (3000ms)
+          - Custom text messages and images
+          - Fullscreen overlay system
+          - Privacy-focused: no internet access, all data stays local
+
+          ### 📥 Installation
+          1. Download `Sublify-macOS.zip`
+          2. Unzip and drag `Sublify.app` to your Applications folder
+          3. Launch from Applications or Spotlight
+
+          ### 🔒 Security Note
+          This app is not notarized. On first launch, you may need to:
+          1. Right-click the app and select "Open"
+          2. Click "Open" in the security dialog
+
+          ### 🛠️ Build from Source
+          ```bash
+          git clone https://github.com/your-username/Sublify.git
+          cd Sublify
+          chmod +x build.sh
+          ./build.sh
+          ```
+
+          ### 🧠 The Science
+          Based on MIT research showing the brain processes images in just 13ms, Sublify uses the same psychological techniques as advertising—but for your personal empowerment.
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

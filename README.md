@@ -1,4 +1,4 @@
-<img src="Assets/Branding/images/sublify-logo.png" alt="Sublify Banner" width="50%">
+<img src="Assets/Branding/images/sublify-logo.png" alt="Sublify Banner" width="30%">
 
 <br>
 
@@ -24,6 +24,38 @@ I built **Sublify** to **flip the script**: instead of letting outside forces sh
 - **Fullscreen Overlay** – capture attention without cluttering your dock
 - **Simple Controls** – click to dismiss, runs quietly in the background
 - **Private & Secure** – no internet access, all data stays on your device
+
+---
+
+## 📥 Installation
+
+### Option 1: Download Pre-built App (Recommended)
+1. Go to [Releases](https://github.com/Lisztos/Sublify/releases)
+2. Download the latest `Sublify-macOS.zip`
+3. Unzip and drag `Sublify.app` to your Applications folder
+4. Launch from Applications or Spotlight
+
+> **Security Note**: This app is not notarized. On first launch, right-click → "Open" → "Open" in the security dialog.
+
+### Option 2: Build from Source
+```bash
+# Clone the repository
+git clone https://github.com/Lisztos/Sublify.git
+cd Sublify
+
+# Make build script executable
+chmod +x build.sh
+
+# Build the app
+./build.sh
+
+# Install to Applications (optional)
+cp -R build/Sublify.app /Applications/
+```
+
+**Requirements:**
+- macOS 13.0 or later
+- Xcode 15.0+ (for building from source)
 
 ---
 
