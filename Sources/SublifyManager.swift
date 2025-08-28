@@ -1,24 +1,15 @@
 import SwiftUI
 import Foundation
-import Combine
 
 class SublifyManager: ObservableObject {
   @Published var isRunning = false
-  @Published var settings: SublifySettings
+  @Published var settings = SublifySettings()
 
   private var timer: Timer?
   private var overlayWindow: NSWindow?
-  private var cancellables = Set<AnyCancellable>()
 
   init() {
-    // Initialize with default settings first
-    self.settings = SublifySettings()
-    
-    // Load saved settings
     loadSettings()
-    
-    // Set up automatic saving when settings change
-    setupAutoSave()
   }
 
   func start() {
@@ -102,17 +93,6 @@ class SublifyManager: ObservableObject {
        let savedSettings = try? JSONDecoder().decode(SublifySettings.self, from: data) {
       settings = savedSettings
     }
-  }
-  
-  private func setupAutoSave() {
-    // Listen for changes to the settings and automatically save them
-    $settings
-      .dropFirst() // Skip the initial value to avoid saving during initialization
-      .debounce(for: .milliseconds(500), scheduler: DispatchQueue.main) // Debounce to avoid excessive saving
-      .sink { [weak self] _ in
-        self?.saveSettings()
-      }
-      .store(in: &cancellables)
   }
 }
 
