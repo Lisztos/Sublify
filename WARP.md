@@ -4,126 +4,254 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 
 ## Project Overview
 
-Sublify is a macOS desktop app built with SwiftUI that delivers personalized motivational messages using subliminal timing (125ms) or visible durations. The app runs as a background utility and displays fullscreen overlays with customizable text or images to boost productivity.
+Sublify is a macOS desktop app built with SwiftUI that delivers personalized motivational messages using subliminal timing (125ms) or visible durations. The app empowers users to reclaim their minds from negative subliminal influences by providing positive, customizable messaging overlays. It runs as a background utility and displays fullscreen overlays with customizable text or images to boost productivity and mental well-being.
 
 ## Common Development Commands
 
 ### Building
 ```bash
-# Build using Xcode project
+# Build using Xcode project (Release)
 xcodebuild -project Sublify.xcodeproj -scheme Sublify -configuration Release build
 
-# Or use the provided build script
+# Build using the provided build script (recommended for releases)
 ./build.sh
 
 # Build using Swift Package Manager (development)
 swift build
 
-# Run directly with SPM
+# Run directly with SPM (development)
 swift run
+
+# Build using Makefile
+make build      # Debug build
+make release    # Release build using build.sh
 ```
 
 ### Running & Testing
 ```bash
-# Open built app
-open build/Release/Sublify.app
+# Open built app (Release)
+open build/Sublify.app
 
 # Install to Applications folder
-cp -R build/Release/Sublify.app /Applications/
+cp -R build/Sublify.app /Applications/
 
-# Run from command line for debugging
-./build/Release/Sublify
+# Launch from Applications after install
+open /Applications/Sublify.app
+
+# Build and run (Debug)
+make run
 ```
 
 ### Development Tools
 ```bash
-# Format Swift code
-swift-format --in-place --recursive Sources/
-
-# Run Swift linter (if swiftlint is installed)
-swiftlint
-
 # Clean build artifacts
-rm -rf .build build/
+make clean
+# OR
+rm -rf build/ DerivedData/
+xcodebuild clean -project Sublify.xcodeproj -scheme Sublify
+
+# Create distributable archive
+make archive
+
+# Check build requirements
+make check
 ```
 
 ## Architecture Overview
 
 ### Core Components
 
-**MotivatorManager** (`Sources/MotivatorManager.swift`)
+**SublifyApp** (`Sources/SublifyApp.swift`)
+- Main app entry point using `@main` attribute
+- Configures window style with hidden title bar and content-based resizing
+- `AppDelegate` handles app lifecycle and icon management
+- Currently runs as `.regular` app (shows in dock) for testing purposes
+
+**SublifyManager** (`Sources/SublifyManager.swift`)
 - Central coordinator managing the motivation display system
 - Handles timer scheduling, overlay management, and settings persistence
-- Uses `Timer` for interval-based displays and `NSWindow` for fullscreen overlays
-- Settings are persisted via `UserDefaults` with JSON encoding
+- Uses `Timer.scheduledTimer` for interval-based displays
+- Creates fullscreen `NSWindow` overlays with `.screenSaver` level
+- Auto-saves settings with debounced persistence using Combine
+- Manages click-to-dismiss functionality
 
-**MotivatorSettings** (within `MotivatorManager.swift`)
+**SublifySettings** (within `SublifyManager.swift`)
 - Codable struct storing all user preferences
-- Key settings: display intervals, duration, text/image content, appearance
-- Default subliminal duration is 125ms, but supports visible durations (2000-5000ms)
-
-**OverlayView** (`Sources/OverlayView.swift`)
-- SwiftUI view that renders the fullscreen motivational display
-- Supports both text and custom image content
-- Handles color themes, font sizing, and click-to-dismiss functionality
-- Uses `.screenSaver` window level to appear above all content
+- Key settings: intervalMinutes (1-60), displayDurationMs, motivationText
+- Image support: useCustomImage toggle and customImagePath
+- Color customization: backgroundColor, textColor with Data encoding
+- Font size customization (default 70pt)
+- Computed properties for easy Color object access
 
 **ContentView** (`Sources/ContentView.swift`)
-- Main application interface showing status and controls
-- Provides start/stop functionality and settings access
-- Displays current configuration (interval, duration, status)
+- Main application interface (450x550 window)
+- Modern design with clean background and centered layout
+- Shows app status with activity badges (Active/Inactive)
+- Statistics display for interval and duration settings
+- Primary action button for start/stop functionality
+- Settings sheet presentation
+- Uses comprehensive design system components
+
+**OverlayView** (`Sources/OverlayView.swift`)
+- SwiftUI view rendering fullscreen motivational displays
+- Modern gradient background with brand colors
+- Supports both text and custom image content with fallback
+- Advanced text styling with background blur effects
+- Dismiss instruction UI with tap icon and text
+- Smooth animations and modern visual effects
+- Click-anywhere-to-dismiss functionality
 
 **SettingsView** (`Sources/SettingsView.swift`)
-- Comprehensive settings interface with multiple sections:
-  - Timing: interval (1-60 minutes) and display duration
-  - Content: toggle between text and custom images
-  - Appearance: background/text colors and font size
-- Includes test functionality to preview displays
+- Comprehensive settings interface (560x720 modal)
+- Modular component architecture with dedicated sections:
+  - `TimingSection`: Interval and duration with preset buttons
+  - `ContentSection`: Text/image toggle with editor and file picker
+  - `AppearanceSection`: Color pickers and font size controls
+  - `PreviewSection`: Live preview and test display functionality
+- Modern header with gradient background
+- Interactive timing presets (Subliminal: 125ms, Brief: 500ms, Visible: 3000ms)
+- File picker integration for custom images
+- Real-time preview updates
+
+**SublifyDesignSystem** (`Sources/SublifyDesignSystem.swift`)
+- Comprehensive design system with modern styling
+- Color palette: Purple/violet primary colors with semantic variants
+- Typography system: H1-H4 headings, body text, captions
+- Spacing system: xs(4) to xxl(48) consistent spacing
+- Custom button styles: Primary gradient, secondary outlined
+- Custom toggle, text field, and card components
+- Shadow system with multiple levels
+- Status badge components with color coding
 
 ### App Structure Patterns
 
+**Modern SwiftUI Architecture**
+- Uses `@StateObject` for SublifyManager binding
+- Sheet-based navigation for settings
+- Combine integration for reactive programming
+- Modern component composition patterns
+
 **Background Operation**
-- App runs as LSUIElement (no dock icon) for minimal distraction
-- Uses `NSApplicationDelegateAdaptor` for app lifecycle management
+- Configured as LSUIElement in Info.plist (no dock icon in production)
+- Currently set to `.regular` in AppDelegate for development
 - Continues running when main window is closed
+- Uses `NSApplicationDelegateAdaptor` for app lifecycle
 
 **Window Management**
-- Main interface: Fixed-size window (300x250) with hidden title bar
+- Main interface: Fixed 450x550 window with hidden title bar
 - Overlay: Borderless fullscreen window with `.screenSaver` level
-- Settings: Resizable sheet presentation (600x700)
+- Settings: 560x720 modal sheet with rounded corners and shadow
+- Multi-monitor support through NSScreen handling
 
 **Timer & Scheduling**
-- Uses `Timer.scheduledTimer` for interval-based displays
+- Uses `Timer.scheduledTimer` for precise interval timing
 - Automatic rescheduling after each display completion
 - Click-dismissal triggers immediate rescheduling
+- Proper timer cleanup on app stop
 
-**File Handling**
+**File Handling & Persistence**
 - Custom images loaded via `NSImage(contentsOfFile:)`
 - File selection through `fileImporter` with `.image` content types
-- Sandboxed file access with read-only permissions
+- Settings persisted to UserDefaults with JSON encoding
+- Auto-save with 500ms debounce using Combine
+- Color encoding/decoding through NSKeyedArchiver
+
+**Advanced UI Features**
+- Hover states with cursor management (hand pointer)
+- Smooth animations with easing curves
+- Modern gradient backgrounds and blur effects
+- Interactive preset selection with visual feedback
+- Real-time character counting and validation
 
 ## Key Configuration Details
 
 - **Target Platform**: macOS 13.0+ (Swift 5.9+)
-- **Architecture**: Universal (Intel + Apple Silicon)
+- **Window Dimensions**: Main (450x550), Settings (560x720)
+- **Bundle Configuration**: LSUIElement enabled for background operation
 - **Sandboxing**: Enabled with user-selected file read permissions
-- **App Category**: Background utility with fullscreen overlay capability
-- **Build System**: Supports both Xcode projects and Swift Package Manager
+- **App Category**: Productivity/Background utility with subliminal messaging
+- **Build System**: Dual support - Xcode projects and Swift Package Manager
+- **Architecture**: Universal (Intel + Apple Silicon)
 
 ## Development Notes
 
-**SwiftUI Integration**
-- Uses `@StateObject` for MotivatorManager binding
-- Combines `NSWindow` management with SwiftUI views via `NSHostingView`
-- Settings persistence through ObservableObject pattern
+**Modern SwiftUI Patterns**
+- Component-based architecture with reusable design system
+- Reactive programming with Combine publishers
+- Proper state management with ObservableObject
+- Advanced styling with custom button and component styles
+- Smooth animations and transitions throughout
 
-**macOS-Specific Features**
+**macOS-Specific Integration**
 - Window level management for overlay display priority
-- NSScreen handling for multi-monitor setups
-- NSClickGestureRecognizer for overlay interaction
+- NSScreen API for multi-monitor support
+- NSClickGestureRecognizer for custom interaction handling
+- NSHostingView for SwiftUI/AppKit bridge
+- App icon management through NSApplication
 
 **User Experience Considerations**
-- Subliminal timing (125ms) vs visible displays (2000-5000ms)
+- Research-backed timing: Subliminal (125ms), Brief (500ms), Visible (3000ms)
 - Click-anywhere-to-dismiss for immediate user control
-- Smooth animations with `.easeInOut` transitions
-- Visual feedback through status indicators and test modes
+- Modern visual design with consistent spacing and typography
+- Accessibility through high contrast and clear visual hierarchy
+- Test functionality for immediate feedback on settings changes
+
+**Performance & Quality**
+- Debounced auto-saving to prevent excessive UserDefaults writes
+- Proper memory management with weak references
+- Clean component separation for maintainability
+- Comprehensive error handling for file operations
+- Modern Swift patterns with optionals and error handling
+
+## Research Foundation
+
+Sublify is built on solid psychological and neuroscientific research:
+
+- **13ms Processing**: MIT research shows brain processes images in 13ms
+- **125ms Threshold**: Below conscious awareness (~150-200ms)
+- **Subliminal Priming**: Creates lasting neural changes and improved recognition
+- **Neuroplasticity**: Repetitive positive exposure strengthens beneficial neural pathways
+- **Breaking Negative Loops**: Interrupts unconscious negative self-talk patterns
+
+## Project Structure
+
+```
+Sublify/
+├── Sources/
+│   ├── SublifyApp.swift           # App entry point and delegate
+│   ├── SublifyManager.swift       # Core business logic and settings
+│   ├── ContentView.swift          # Main UI interface
+│   ├── OverlayView.swift          # Fullscreen message display
+│   ├── SettingsView.swift         # Comprehensive settings interface
+│   └── SublifyDesignSystem.swift  # Design system and styling
+├── Assets.xcassets/               # App icons and image assets
+├── .github/workflows/             # GitHub Actions for CI/CD
+├── Sublify.xcodeproj/            # Xcode project configuration
+├── Package.swift                  # Swift Package Manager config
+├── Info.plist                    # App configuration and permissions
+├── Sublify.entitlements          # App sandbox permissions
+├── build.sh                      # Automated build script
+├── Makefile                      # Build automation with targets
+├── exportOptions.plist           # Export configuration for distribution
+├── README.md                     # User documentation and features
+├── RESEARCH.md                   # Research contribution guidelines
+├── CONTRIBUTING.md               # Development contribution guide
+└── LICENSE                       # MIT license
+```
+
+## Key Files Explained
+
+- **build.sh**: Complete build pipeline with archiving and export
+- **Makefile**: Development shortcuts (build, clean, install, run, archive)
+- **Info.plist**: Configures LSUIElement for background operation
+- **Sublify.entitlements**: Sandbox permissions for file access
+- **exportOptions.plist**: Distribution settings for app store or direct distribution
+- **Package.swift**: Minimal SPM config for development builds
+- **Assets.xcassets/**: Contains app icon in multiple resolutions (16x16 to 512x512)
+
+## Git Workflow
+
+The project uses GitHub Actions for automated building and releases:
+- **release.yml**: Builds and publishes releases when tags are pushed
+- Issues templates for bug reports and feature requests
+- Discussions enabled for community engagement and research contributions
