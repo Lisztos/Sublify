@@ -1,27 +1,19 @@
-<div style="display: flex; align-items: end ">
-<img src="Assets/Branding/images/sublify-logo.png" alt="Sublify Banner" width="20%">
- <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sublify</h1>
-</div>
+<img src="Assets/Branding/images/sublify-logo.png" alt="Sublify Banner" width="80px">
+
+# Sublify
 
 _Shape your subconscious. Reclaim your mind._
-
-
-<br/>
-
 
 ![Build Status](https://github.com/Lisztos/Sublify/workflows/Build%20and%20Release/badge.svg)
 [![Latest Release](https://img.shields.io/github/v/release/Lisztos/Sublify)](https://github.com/Lisztos/Sublify/releases/latest)
 [![License](https://img.shields.io/github/license/Lisztos/Sublify)](LICENSE)
 [![macOS](https://img.shields.io/badge/macOS-13.0%2B-blue)](https://www.apple.com/macos)
 
-
-
-
 ## 💡 Motivation
 
 Every day, we’re bombarded by thousands of subliminal cues—ads, logos, feeds—all designed to influence us without our awareness. Corporations spend billions planting seeds of insecurity and desire directly into our subconscious.
 
-I built **Sublify** to **flip the script**: instead of letting outside forces shape your mind, you can use the same psychological techniques for *your own* growth—empowering beliefs, personal goals, and positive self-talk.
+I built **Sublify** to **flip the script**: instead of letting outside forces shape your mind, you can use the same psychological techniques for _your own_ growth, empowering beliefs, personal goals, and positive self-talk.
 
 ---
 
@@ -90,10 +82,12 @@ Research shows subliminal exposure creates **lasting neural changes**:
 📖 [Technology Networks: How Subliminal Images Impact the Brain](https://www.technologynetworks.com/neuroscience/articles/how-subliminal-images-impact-your-brain-and-behavior-344858)
 
 ### Neuroplasticity & Repetition
+
 Your brain rewires itself based on repeated patterns. Advertising exploits this; Sublify uses it to strengthen **positive neural pathways**.
 
 ### Breaking Negative Loops
-Sublify interrupts unconscious negative self-talk and replaces it with empowering cues—shifting your internal dialogue over time.
+
+Sublify interrupts unconscious negative self-talk and replaces it with empowering cues, shifting your internal dialogue over time.
 
 ---
 
@@ -116,7 +110,7 @@ Sublify interrupts unconscious negative self-talk and replaces it with empowerin
 
 ## 🙌 Support
 
-Sublify was created to **democratize subliminal techniques**—taking tools once used by advertisers and turning them into a force for personal empowerment.
+Sublify was created to **democratize subliminal techniques**, taking tools once used by advertisers and turning them into a force for personal empowerment.
 
 Contributions, feedback, or research links are very welcome (issues & PRs open).
 
