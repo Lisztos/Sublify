@@ -112,8 +112,7 @@ struct SettingsHeader: View {
 
           Spacer()
 
-          Button("Save Changes") {
-            sublifyManager.saveSettings()
+          Button("Done") {
             dismiss()
           }
           .buttonStyle(SublifySecondaryButtonStyle())
