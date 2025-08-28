@@ -1,15 +1,21 @@
-<img src="Assets/Branding/images/sublify-logo.png" alt="Sublify Banner" width="30%">
+<div style="display: flex; align-items: end ">
+<img src="Assets/Branding/images/sublify-logo.png" alt="Sublify Banner" width="20%">
+ <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sublify</h1>
+</div>
 
-<br>
+_Shape your subconscious. Reclaim your mind._
 
-# Sublify
 
-**Shape your subconscious. Reclaim your mind.**
+<br/>
+
 
 ![Build Status](https://github.com/Lisztos/Sublify/workflows/Build%20and%20Release/badge.svg)
 [![Latest Release](https://img.shields.io/github/v/release/Lisztos/Sublify)](https://github.com/Lisztos/Sublify/releases/latest)
 [![License](https://img.shields.io/github/license/Lisztos/Sublify)](LICENSE)
 [![macOS](https://img.shields.io/badge/macOS-13.0%2B-blue)](https://www.apple.com/macos)
+
+
+
 
 ## 💡 Motivation
 
