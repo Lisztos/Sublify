@@ -1,5 +1,10 @@
 import SwiftUI
 
+// Global SublifyManager instance
+class SublifyManagerShared {
+  static let shared = SublifyManager()
+}
+
 @main
 struct SublifyApp: App {
   @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -15,11 +20,11 @@ struct SublifyApp: App {
 
 class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationDidFinishLaunching(_ notification: Notification) {
-    // Show dock icon for testing
-    NSApp.setActivationPolicy(.regular)
-
     // Set the app icon programmatically
     setAppIcon()
+    
+    // Configure dock and menu bar based on settings
+    configureDockAndMenuBar()
   }
 
   func applicationShouldTerminateAfterLastWindowClosed(_ app: NSApplication) -> Bool {
@@ -50,5 +55,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     print("⚠️ Could not find app icon file")
+  }
+  
+  private func configureDockAndMenuBar() {
+    let manager = SublifyManagerShared.shared
+    
+    // Configure dock visibility
+    if manager.settings.hideFromDock {
+      NSApp.setActivationPolicy(.accessory)
+    } else {
+      NSApp.setActivationPolicy(.regular)
+    }
+    
+    // Setup menu bar if requested
+    if manager.settings.showInMenuBar {
+      manager.setupMenuBar()
+    }
+  }
+  
+  func updateDockAndMenuBarVisibility() {
+    configureDockAndMenuBar()
   }
 }

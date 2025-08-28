@@ -9,6 +9,7 @@ class SublifyManager: ObservableObject {
   private var timer: Timer?
   private var overlayWindow: NSWindow?
   private var cancellables = Set<AnyCancellable>()
+  private var statusItem: NSStatusItem?
 
   init() {
     // Initialize with default settings first
@@ -114,6 +115,113 @@ class SublifyManager: ObservableObject {
       }
       .store(in: &cancellables)
   }
+  
+  // MARK: - Menu Bar Management
+  func setupMenuBar() {
+    guard settings.showInMenuBar else {
+      removeMenuBar()
+      return
+    }
+    
+    if statusItem == nil {
+      statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+    }
+    
+    guard let statusItem = statusItem else { return }
+    
+    // Set the status item icon
+    if let button = statusItem.button {
+      // Try to get the app icon first
+      if let appIcon = NSApp.applicationIconImage {
+        let resizedIcon = appIcon.resized(to: NSSize(width: 18, height: 18))
+        button.image = resizedIcon
+      } else {
+        // Fallback to SF Symbol
+        button.image = NSImage(systemSymbolName: "app.fill", accessibilityDescription: "Sublify")
+      }
+      
+      button.toolTip = "Sublify - Subliminal Motivation"
+    }
+    
+    // Create menu
+    let menu = NSMenu()
+    
+    // Status info
+    let statusMenuItem = NSMenuItem()
+    statusMenuItem.title = isRunning ? "Status: Active" : "Status: Inactive"
+    statusMenuItem.isEnabled = false
+    menu.addItem(statusMenuItem)
+    
+    menu.addItem(NSMenuItem.separator())
+    
+    // Start/Stop toggle
+    let toggleItem = NSMenuItem(
+      title: isRunning ? "Stop" : "Start",
+      action: #selector(toggleFromMenuBar),
+      keyEquivalent: ""
+    )
+    toggleItem.target = self
+    menu.addItem(toggleItem)
+    
+    menu.addItem(NSMenuItem.separator())
+    
+    // Show main window
+    let showWindowItem = NSMenuItem(
+      title: "Show Sublify",
+      action: #selector(showMainWindow),
+      keyEquivalent: ""
+    )
+    showWindowItem.target = self
+    menu.addItem(showWindowItem)
+    
+    menu.addItem(NSMenuItem.separator())
+    
+    // Quit
+    let quitItem = NSMenuItem(
+      title: "Quit Sublify",
+      action: #selector(quitApp),
+      keyEquivalent: "q"
+    )
+    quitItem.target = self
+    menu.addItem(quitItem)
+    
+    self.statusItem?.menu = menu
+  }
+  
+  func removeMenuBar() {
+    if let statusItem = statusItem {
+      NSStatusBar.system.removeStatusItem(statusItem)
+      self.statusItem = nil
+    }
+  }
+  
+  @objc private func toggleFromMenuBar() {
+    if isRunning {
+      stop()
+    } else {
+      start()
+    }
+    setupMenuBar() // Refresh menu
+  }
+  
+  @objc private func showMainWindow() {
+    NSApp.activate(ignoringOtherApps: true)
+    
+    // Find and show the main window
+    for window in NSApp.windows {
+      if window.contentViewController?.view.subviews.first is NSHostingView<ContentView> ||
+         window.title.isEmpty { // Main window typically has no title due to hidden title bar
+        window.makeKeyAndOrderFront(nil)
+        break
+      }
+    }
+  }
+  
+  @objc private func quitApp() {
+    stop()
+    removeMenuBar()
+    NSApp.terminate(nil)
+  }
 }
 
 struct SublifySettings: Codable {
@@ -125,6 +233,8 @@ struct SublifySettings: Codable {
   var backgroundColorData: Data = Color.black.colorData
   var textColorData: Data = Color.white.colorData
   var fontSize: Int = 70
+  var showInMenuBar: Bool = true
+  var hideFromDock: Bool = false
 
   // Computed properties for easy access to Color objects
   var backgroundColor: Color {
@@ -150,5 +260,19 @@ extension Color {
       return nil
     }
     return Color(nsColor)
+  }
+}
+
+// Extension to handle NSImage resizing for menu bar
+extension NSImage {
+  func resized(to newSize: NSSize) -> NSImage {
+    let newImage = NSImage(size: newSize)
+    newImage.lockFocus()
+    self.draw(in: NSRect(x: 0, y: 0, width: newSize.width, height: newSize.height),
+              from: NSRect.zero,
+              operation: .sourceOver,
+              fraction: 1.0)
+    newImage.unlockFocus()
+    return newImage
   }
 }

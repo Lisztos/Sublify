@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-  @StateObject private var sublifyManager = SublifyManager()
+  @StateObject private var sublifyManager = SublifyManagerShared.shared
   @State private var showingSettings = false
 
   var body: some View {

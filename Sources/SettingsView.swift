@@ -18,6 +18,8 @@ struct SettingsView: View {
           ContentSection(sublifyManager: sublifyManager, showingImagePicker: $showingImagePicker)
 
           AppearanceSection(sublifyManager: sublifyManager)
+          
+          BehaviorSection(sublifyManager: sublifyManager)
 
           PreviewSection(sublifyManager: sublifyManager, testDisplay: testDisplay)
         }
@@ -569,6 +571,106 @@ struct FontSizeItem: View {
   }
 }
 
+// MARK: - Behavior Section
+struct BehaviorSection: View {
+  @ObservedObject var sublifyManager: SublifyManager
+
+  var body: some View {
+    VStack(alignment: .leading, spacing: SublifySpacing.md) {
+      Label {
+        Text("App Behavior")
+          .font(.sublifyH4)
+          .foregroundColor(.sublifyText)
+      } icon: {
+        Image(systemName: "gear.circle.fill")
+          .foregroundColor(.sublifyPrimary)
+          .font(.system(size: 14))
+      }
+
+      VStack(spacing: 0) {
+        BehaviorToggleRow(
+          title: "Show in Menu Bar",
+          subtitle: "Display app icon in the menu bar for quick access",
+          icon: "menubar.rectangle",
+          isOn: $sublifyManager.settings.showInMenuBar,
+          onChange: { _ in
+            updateDockAndMenuBar()
+          }
+        )
+
+        Divider()
+          .background(Color.sublifyBorder.opacity(0.5))
+
+        BehaviorToggleRow(
+          title: "Hide from Dock",
+          subtitle: "Remove app icon from the Dock when running",
+          icon: "dock.rectangle",
+          isOn: $sublifyManager.settings.hideFromDock,
+          onChange: { _ in
+            updateDockAndMenuBar()
+          }
+        )
+      }
+      .cornerRadius(SublifyRadius.lg)
+      .overlay(
+        RoundedRectangle(cornerRadius: SublifyRadius.lg)
+          .stroke(Color.sublifyBorder.opacity(0.3), lineWidth: 1)
+      )
+    }
+  }
+  
+  private func updateDockAndMenuBar() {
+    // Update dock and menu bar visibility
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      if let appDelegate = NSApp.delegate as? AppDelegate {
+        appDelegate.updateDockAndMenuBarVisibility()
+      }
+    }
+  }
+}
+
+// MARK: - Behavior Toggle Row
+struct BehaviorToggleRow: View {
+  let title: String
+  let subtitle: String
+  let icon: String
+  @Binding var isOn: Bool
+  let onChange: (Bool) -> Void
+
+  var body: some View {
+    HStack {
+      HStack(spacing: SublifySpacing.sm) {
+        Image(systemName: icon)
+          .foregroundColor(.sublifyPrimary.opacity(0.8))
+          .font(.system(size: 12))
+          .frame(width: 16)
+
+        VStack(alignment: .leading, spacing: 2) {
+          Text(title)
+            .font(.system(size: 13, weight: .medium))
+            .foregroundColor(.sublifyText)
+          Text(subtitle)
+            .font(.system(size: 11))
+            .foregroundColor(.sublifyTextSecondary)
+        }
+      }
+
+      Spacer()
+
+      Toggle("", isOn: Binding(
+        get: { isOn },
+        set: { newValue in
+          isOn = newValue
+          onChange(newValue)
+        }
+      ))
+        .toggleStyle(SublifyToggleStyle())
+    }
+    .padding(SublifySpacing.md)
+    .background(Color.sublifyCardBackground)
+  }
+}
+
 // MARK: - Preview Section
 struct PreviewSection: View {
   @ObservedObject var sublifyManager: SublifyManager
@@ -679,5 +781,5 @@ extension NSClickGestureRecognizer {
 }
 
 private struct AssociatedKeys {
-  static var handler = "handler"
+  static var handler: UInt8 = 0
 }
